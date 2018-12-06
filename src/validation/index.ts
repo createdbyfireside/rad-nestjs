@@ -1,0 +1,1 @@
+export { SchemaValidationPipe } from './SchemaValidationPipe';

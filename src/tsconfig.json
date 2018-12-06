@@ -1,0 +1,6 @@
+{
+   "extends": "@silvermine/typescript-config/tsconfig.json",
+   "compilerOptions": {
+      "skipLibCheck": true
+   }
+}
