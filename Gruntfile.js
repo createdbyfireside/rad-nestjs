@@ -19,7 +19,7 @@ module.exports = (grunt) => {
             './tests/**/*.ts',
          ],
          configs: {
-            standards: 'src/tsconfig.json',
+            standards: 'tsconfig.json',
             commonjs: 'src/tsconfig.commonjs.json',
             esm: 'src/tsconfig.esm.json',
             types: 'src/tsconfig.types.json',
