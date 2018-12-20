@@ -23,7 +23,6 @@ jobs:
    include:
       stage: deploy
       node_js: "8.10"
-      skip_cleanup: true
       script:
          - grunt build
       before_deploy:
@@ -32,6 +31,7 @@ jobs:
          provider: npm
          email: $NPM_AUTH_EMAIL
          api_key: $NPM_AUTH_TOKEN
+         skip_cleanup: true
          on:
             tags: true
             condition: $TRAVIS_TAG =~ ^v[0-9].*$
