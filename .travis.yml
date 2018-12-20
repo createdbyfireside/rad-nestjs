@@ -23,6 +23,7 @@ jobs:
    include:
       stage: deploy
       node_js: "8.10"
+      skip_cleanup: true
       before_deploy:
          - ./scripts/check-signed-tag.sh
          - grunt build
