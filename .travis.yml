@@ -1,4 +1,5 @@
 language: node_js
+
 node_js:
    - "node" # Latest node version
    - "lts/*" # Latest LTS version
@@ -6,14 +7,29 @@ node_js:
    - "8"
    - "8.10"
 
-before_install: if [[ `npm -v` != 6* ]]; then npm i -g npm@6.4.1; fi
+jobs:
+   include:
+      stage: test
+      before_install: if [[ `npm -v` != 6* ]]; then npm i -g npm@6.4.1; fi
+      script:
+         - node --version
+         - npm --version
+         - grunt standards
+         - npm test
+      # For code coverage:
+      after_success:
+         cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
 
-script:
-   - node --version
-   - npm --version
-   - grunt standards
-   - npm test
-
-# For code coverage:
-after_success:
-   cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+   include:
+      stage: deploy
+      node_js: "8.10"
+      before_deploy:
+         - ./scripts/check-signed-tag.sh
+         - grunt build
+      deploy:
+         provider: npm
+         email: $NPM_AUTH_EMAIL
+         api_key: $NPM_AUTH_TOKEN
+         on:
+            tags: true
+            condition: $TRAVIS_TAG =~ ^v[0-9].*$
