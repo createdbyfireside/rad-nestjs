@@ -21,6 +21,9 @@
    "engines": {
       "node": ">=6.0"
    },
+   "publishConfig": {
+      "access": "public"
+   },
    "devDependencies": {
       "@nestjs/common": "5.4.1",
       "@nestjs/core": "5.4.1",
