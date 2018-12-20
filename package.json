@@ -1,6 +1,6 @@
 {
    "name": "@createdbyfireside/rad-nestjs",
-   "version": "0.0.0-pre-release.2",
+   "version": "0.0.0-pre-release.3",
    "description": "A rapid application development library for Nest.js",
    "main": "./dist/commonjs/index",
    "types": "./dist/types/index.d.ts",
