@@ -4,7 +4,6 @@ import { expect } from 'chai';
 import * as Joi from 'joi';
 
 describe('SchemaValidationPipe', () => {
-   // eslint-disable-next-line @silvermine/silvermine/no-multiline-var-declarations
    const schema = Joi.object()
       .keys({
          username: Joi.string().required(),
