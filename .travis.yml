@@ -26,7 +26,17 @@ jobs:
       script:
          - grunt build
       before_deploy:
-         - ./scripts/check-signed-tag.sh
+         - curl https://raw.githubusercontent.com/createdbyfireside/authorized-publishers/master/keys/trusted-keys.txt > trusted-keys.txt
+         - curl https://raw.githubusercontent.com/createdbyfireside/authorized-publishers/master/keys/authorized-publishers.asc > authorized-publishers.asc
+         - echo "Importing authorized publisher's gpg keys"
+         # Import gpg keys that are authorized to trigger npm publish
+         - gpg --import authorized-publishers.asc
+         - echo "Importing gpg trust store"
+         # Import trust store
+         - gpg --import-ownertrust < trusted-keys.txt
+         - echo "Verifying tag $TRAVIS_TAG"
+         # Verify the current tag with git
+         - git tag -v $TRAVIS_TAG
       deploy:
          provider: npm
          email: $NPM_AUTH_EMAIL
